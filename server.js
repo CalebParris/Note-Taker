@@ -1,0 +1,19 @@
+const fs = require('fs');
+const express = require('express');
+
+const app = express();
+
+const PORT = process.env.PORT || 8080;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json);
+
+//=============================
+
+// Write server code here
+
+//=============================
+
+app.listen(PORT, function(){
+    console.log('App listening on PORT: ' + PORT);
+})
