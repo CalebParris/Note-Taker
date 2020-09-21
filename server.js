@@ -3,6 +3,9 @@ const fs = require("fs");
 const express = require("express");
 const path = require("path");
 
+// Variables
+let notes;
+
 // Express setup
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,21 +14,18 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// JSON Notes object
-const notes = [];
-
+// Reads the db.json file and stores the contents into the notes variable
 fs.readFile("./db/db.json", function(error, data){
     if (error){
         console.log(error);
     } else {
-        const saved = JSON.parse(data);
-        notes.push(saved);
+        notes = JSON.parse(data);
     }
 });
 
 // API Routes
 app.get("/api/notes", function(req, res){
-    res.json(notes);
+    return res.json(notes);
 });
 
 // HTML Routes
