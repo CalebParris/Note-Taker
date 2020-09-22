@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 // Data parsing for Express
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("public"));
 
 // Reads the db.json file and stores the contents into the notes variable
 fs.readFile("./db/db.json", function(error, data){
