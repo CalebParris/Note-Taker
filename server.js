@@ -44,6 +44,7 @@ app.post("/api/notes", function(req, res){
     return res.json(notes);
 });
 
+// Filters out the notes with the matching ID and updates the db.json file with only the non-matching notes, then displays it on the HTML
 app.delete("/api/notes/:id", function(req, res){
   notes = notes.filter((note) => note.id != req.params.id);
   return res.json(notes);
