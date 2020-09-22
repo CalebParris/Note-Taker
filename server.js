@@ -26,6 +26,10 @@ fs.readFile("./db/db.json", function(error, data){
 
 // API Routes
 app.get("/api/notes", function(req, res){
+    // for (let i = 0; i < notes.length; i++){
+    //     notes[i].id = i + 1;
+    // }
+
     return res.json(notes);
 });
 
@@ -33,8 +37,17 @@ app.post("/api/notes", function(req, res){
     let newNote = req.body;
 
     notes.push(newNote);
-    res.json(notes);
+
+    for (let i = 0; i < notes.length; i++){
+        notes[i].id = i + 1;
+    }
+
+    return res.json(notes);
 });
+
+// app.delete("/api/notes/:id", function(req, res){
+
+// });
 
 // HTML Routes
 app.get("/notes", function(req, res){
