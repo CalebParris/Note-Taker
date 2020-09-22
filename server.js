@@ -10,7 +10,7 @@ let notes;
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Data parsing for Express
+// Express Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -27,6 +27,13 @@ fs.readFile("./db/db.json", function(error, data){
 // API Routes
 app.get("/api/notes", function(req, res){
     return res.json(notes);
+});
+
+app.post("/api/notes", function(req, res){
+    let newNote = req.body;
+
+    notes.push(newNote);
+    res.json(notes);
 });
 
 // HTML Routes
