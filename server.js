@@ -25,19 +25,18 @@ fs.readFile("./db/db.json", function(error, data){
 });
 
 // API Routes
+// Grabs the data from db.json file that we stored above and puts it in the /api/notes route. Thus allowing the HTML to get the info and display it on the page
 app.get("/api/notes", function(req, res){
-    // for (let i = 0; i < notes.length; i++){
-    //     notes[i].id = i + 1;
-    // }
-
     return res.json(notes);
 });
 
+// Takes the input data from the html and adds it to the db.json file
 app.post("/api/notes", function(req, res){
     let newNote = req.body;
 
     notes.push(newNote);
 
+    // Adds an ID to each of the objects in the db.json file
     for (let i = 0; i < notes.length; i++){
         notes[i].id = i + 1;
     }
@@ -45,9 +44,10 @@ app.post("/api/notes", function(req, res){
     return res.json(notes);
 });
 
-// app.delete("/api/notes/:id", function(req, res){
-
-// });
+app.delete("/api/notes/:id", function(req, res){
+  notes = notes.filter((note) => note.id != req.params.id);
+  return res.json(notes);
+});
 
 // HTML Routes
 app.get("/notes", function(req, res){
