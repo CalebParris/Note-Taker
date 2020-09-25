@@ -2,6 +2,7 @@
 const fs = require("fs");
 const express = require("express");
 const path = require("path");
+const { json } = require("express");
 
 // Variables
 let notes;
@@ -41,12 +42,25 @@ app.post("/api/notes", function(req, res){
         notes[i].id = i + 1;
     }
 
+    // Writes the new note to the db.json file, so that the saved note will stay even if the server is restarted
+    fs.writeFile("./db/db.json", JSON.stringify(notes), function(error){
+        if (error){
+            console.log(error);
+        }
+    });
+
     return res.json(notes);
 });
 
 // Filters out the notes with the matching ID and updates the db.json file with only the non-matching notes, then displays it on the HTML
 app.delete("/api/notes/:id", function(req, res){
   notes = notes.filter((note) => note.id != req.params.id);
+  
+  fs.writeFile("./db/db.json", JSON.stringify(notes), function(error){
+        if (error){
+            console.log(error);
+        }
+    });
   return res.json(notes);
 });
 
