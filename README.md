@@ -3,7 +3,7 @@
    [![Github](https://img.shields.io/badge/License-MIT-brightgreen)](#License)
 
    ## Description
-   This project uses a server to create and save notes that can be viewed and deleted after being saved.
+   This project uses a server to create and save notes that can be viewed and deleted after being saved. These notes will remain in the app even after the server is restarted.
 
    ## Table of Contents
    * [Installation](#Installation)
